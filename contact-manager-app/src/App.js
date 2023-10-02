@@ -3,7 +3,6 @@ import "./styles.css";
 import axios from "axios";
 import {
   Button,
-  EditableText,
   InputGroup,
   Toaster,
   Position,
@@ -111,6 +110,61 @@ export default function App() {
     }
   };
 
+  const updateUser = (id) => {
+    const userToUpdate = data.find((user) => user.id === id);
+  
+    if (userToUpdate) {
+      fetch(`https://jsonplaceholder.typicode.com/users/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(userToUpdate),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((response) => response.json())
+        .then(() => {
+          AppToaster.show({
+            message: "User updated successfully",
+            intent: "success",
+            timeout: 3000,
+          });
+        })
+        .catch((error) => {
+          console.error("Error updating user:", error);
+          AppToaster.show({
+            message: "Error updating user",
+            intent: "danger",
+            timeout: 3000,
+          });
+        });
+    }
+  };
+
+  const deleteUser = id => {
+    fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+      method: "DELETE",
+    })
+      .then(response => response.json())
+      .then(() => {
+        setData(values => {
+          return values.filter(item => item.id !== id)
+        })
+        AppToaster.show({
+          message: "User deleted successfully",
+          intent: "success",
+          timeout: 3000,
+        })
+      })
+  }
+
+  const onChangeHandler = (id, key, value) => {
+    setData(values => {
+      return values.map(item =>
+        item.id === id ? { ...item, [key]: value } : item
+      )
+    })
+  }
+
   return (
     <div>
       <h1>Search For Contact Info</h1>
@@ -142,26 +196,52 @@ export default function App() {
           </tr>
         </thead>
         <tbody>
-          {data.map(user => (
+          {data.map((user) => (
             <tr key={user.id}>
               <td>{user.id}</td>
-              <td>{user.name}</td>
               <td>
-                <EditableText value={user.email} />
+                <input
+                  type="text"
+                  value={user.name}
+                  onChange={(e) => onChangeHandler(user.id, 'name', e.target.value)}
+                />
               </td>
               <td>
-                <EditableText value={user.phone} />
+                <input
+                  type="text"
+                  value={user.email}
+                  onChange={(e) => onChangeHandler(user.id, 'email', e.target.value)}
+                />
               </td>
               <td>
-                <EditableText value={user.website} />
+                <input
+                  type="text"
+                  value={user.phone}
+                  onChange={(e) => onChangeHandler(user.id, 'phone', e.target.value)}
+                />
               </td>
               <td>
-                <EditableText value={user.company.name} />
+                <input
+                  type="text"
+                  value={user.website}
+                  onChange={(e) => onChangeHandler(user.id, 'website', e.target.value)}
+                />
               </td>
               <td>
-                <Button intent="primary">Update</Button>
+                <input
+                  type="text"
+                  value={user.company.name}
+                  onChange={(e) => onChangeHandler(user.id, 'company', e.target.value)}
+                />
+              </td>
+              <td>
+                <Button intent="primary" onClick={() => updateUser(user.id)}>
+                  Update
+                </Button>
                 &nbsp;
-                <Button intent="danger">Delete</Button>
+                <Button intent="danger" onClick={() => deleteUser(user.id)}>
+                  Delete
+                </Button>
               </td>
             </tr>
           ))}
