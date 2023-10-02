@@ -29,11 +29,7 @@ export const UpdateUser = () => {
 
   const retrieveUser = () => {
     axios
-      .get(`${baseURL}/user/${id}/`, {
-        headers: {
-          headers,
-        },
-      })
+      .get(`${baseURL}/user/${id}/`)
       .then((response) => {
         setCurrentUser({
           id: response.data.id,
@@ -60,11 +56,7 @@ export const UpdateUser = () => {
     };
 
     axios
-      .put(`${baseURL}/user/${id}/`, data, {
-        headers: {
-          headers,
-        },
-      })
+      .put(`${baseURL}/user/${id}/`, data)
       .then((response) => {
         setCurrentUser({
           id: response.data.id,

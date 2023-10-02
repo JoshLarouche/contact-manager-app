@@ -188,7 +188,7 @@ export default function App() {
             <Routes>
               <Route path="/" element={<UserList />} />
               <Route path="/add/" element={<AddUser />} />
-              <Route path="/menu/:id/update/" element={<UpdateUser />} />
+              <Route path="/user/:id/update/" element={<UpdateUser />} />
             </Routes>
           </div>
       <h1>Search For Contact Info</h1>

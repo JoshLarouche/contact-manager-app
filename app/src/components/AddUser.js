@@ -30,11 +30,7 @@ export const AddUser = () => {
     };
 
     axios
-      .post(`${baseURL}/user/`, data, {
-        headers: {
-          headers,
-        },
-      })
+      .post(`${baseURL}/user/`, data)
       .then((response) => {
         setUser({
           id: response.data.id,
