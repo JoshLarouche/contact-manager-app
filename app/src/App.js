@@ -1,4 +1,9 @@
 import React, { useEffect, useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Routes, Route, Link } from "react-router-dom";
+import { AddUser } from "./components/AddUser";
+import { UserList } from "./components/UserList";
+import { UpdateUser } from "./components/UpdateUser";
 import "./styles.css";
 import axios from "axios";
 import {
@@ -167,6 +172,25 @@ export default function App() {
 
   return (
     <div>
+      <nav className="navbar navbar-expand navbar-dark bg-info">
+            <a href="/" className="navbar-brand">
+              Restaurant User
+            </a>
+            <div className="navbar-nav mr-auto">
+              <li className="nav-item">
+                <Link exact to={"/add/"} className="nav-link">
+                  Add
+                </Link>
+              </li>
+            </div>
+          </nav>
+          <div className="container m-10">
+            <Routes>
+              <Route path="/" element={<UserList />} />
+              <Route path="/add/" element={<AddUser />} />
+              <Route path="/menu/:id/update/" element={<UpdateUser />} />
+            </Routes>
+          </div>
       <h1>Search For Contact Info</h1>
 
       <input
@@ -182,117 +206,115 @@ export default function App() {
           <List user={user} key={user.id} setData={setData} />
         ))}
       </div>
-      <div className="App">
-      <table class="bp4-html-table .modifier">
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Website</th>
-            <th>Company</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((user) => (
-            <tr key={user.id}>
-              <td>{user.id}</td>
+        <table class="bp4-html-table .modifier">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Website</th>
+              <th>Company</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((user) => (
+              <tr key={user.id}>
+                <td>{user.id}</td>
+                <td>
+                  <input
+                    type="text"
+                    value={user.name}
+                    onChange={(e) => onChangeHandler(user.id, 'name', e.target.value)}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    value={user.email}
+                    onChange={(e) => onChangeHandler(user.id, 'email', e.target.value)}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    value={user.phone}
+                    onChange={(e) => onChangeHandler(user.id, 'phone', e.target.value)}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    value={user.website}
+                    onChange={(e) => onChangeHandler(user.id, 'website', e.target.value)}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    value={user.company.name}
+                    onChange={(e) => onChangeHandler(user.id, 'company', e.target.value)}
+                  />
+                </td>
+                <td>
+                  <Button intent="primary" onClick={() => updateUser(user.id)}>
+                    Update
+                  </Button>
+                  &nbsp;
+                  <Button intent="danger" onClick={() => deleteUser(user.id)}>
+                    Delete
+                  </Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+          <tfoot>
+            <tr>
+              <td></td>
               <td>
-                <input
-                  type="text"
-                  value={user.name}
-                  onChange={(e) => onChangeHandler(user.id, 'name', e.target.value)}
+                <InputGroup
+                  value={newName}
+                  onChange={e => setNewName(e.target.value)}
+                  placeholder="Add name here..."
                 />
               </td>
               <td>
-                <input
-                  type="text"
-                  value={user.email}
-                  onChange={(e) => onChangeHandler(user.id, 'email', e.target.value)}
+                <InputGroup
+                  placeholder="Add email here..."
+                  value={newEmail}
+                  onChange={e => setNewEmail(e.target.value)}
                 />
               </td>
               <td>
-                <input
-                  type="text"
-                  value={user.phone}
-                  onChange={(e) => onChangeHandler(user.id, 'phone', e.target.value)}
+                <InputGroup
+                  placeholder="Add phone here..."
+                  value={newPhone}
+                  onChange={e => setNewPhone(e.target.value)}
                 />
               </td>
               <td>
-                <input
-                  type="text"
-                  value={user.website}
-                  onChange={(e) => onChangeHandler(user.id, 'website', e.target.value)}
+                <InputGroup
+                  placeholder="Add website here..."
+                  value={newWebsite}
+                  onChange={e => setNewWebsite(e.target.value)}
                 />
               </td>
               <td>
-                <input
-                  type="text"
-                  value={user.company.name}
-                  onChange={(e) => onChangeHandler(user.id, 'company', e.target.value)}
+                <InputGroup
+                  placeholder="Add company here..."
+                  value={newCompany}
+                  onChange={e => setNewCompany(e.target.value)}
                 />
               </td>
               <td>
-                <Button intent="primary" onClick={() => updateUser(user.id)}>
-                  Update
-                </Button>
-                &nbsp;
-                <Button intent="danger" onClick={() => deleteUser(user.id)}>
-                  Delete
+                <Button intent="success" onClick={addUser}>
+                  Add user
                 </Button>
               </td>
             </tr>
-          ))}
-        </tbody>
-        <tfoot>
-          <tr>
-            <td></td>
-            <td>
-              <InputGroup
-                value={newName}
-                onChange={e => setNewName(e.target.value)}
-                placeholder="Add name here..."
-              />
-            </td>
-            <td>
-              <InputGroup
-                placeholder="Add email here..."
-                value={newEmail}
-                onChange={e => setNewEmail(e.target.value)}
-              />
-            </td>
-            <td>
-              <InputGroup
-                placeholder="Add phone here..."
-                value={newPhone}
-                onChange={e => setNewPhone(e.target.value)}
-              />
-            </td>
-            <td>
-              <InputGroup
-                placeholder="Add website here..."
-                value={newWebsite}
-                onChange={e => setNewWebsite(e.target.value)}
-              />
-            </td>
-            <td>
-              <InputGroup
-                placeholder="Add company here..."
-                value={newCompany}
-                onChange={e => setNewCompany(e.target.value)}
-              />
-            </td>
-            <td>
-              <Button intent="success" onClick={addUser}>
-                Add user
-              </Button>
-            </td>
-          </tr>
-        </tfoot>
-      </table>
-    </div>
+          </tfoot>
+        </table>
     </div>
   )
 }

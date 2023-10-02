@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { baseURL, headers } from "./../services/user.service";
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +9,8 @@ export const UserList = () => {
 
   const [deleted, setDeleted] = useState(false);
 
-  const retrieveAllUsers = () => {
+  // Wrap retrieveAllUsers in useCallback
+  const retrieveAllUsers = useCallback(() => {
     axios
       .get(`${baseURL}/user/`, {
         headers: {
@@ -23,7 +24,7 @@ export const UserList = () => {
       .catch((e) => {
         console.error(e);
       });
-  };
+  }, [users]); // No dependencies needed for useCallback
 
   const deleteUser = (id) => {
     axios
@@ -41,10 +42,9 @@ export const UserList = () => {
       });
   };
 
-
   useEffect(() => {
     retrieveAllUsers();
-  }, [retrieveAllUsers]);
+  }, [retrieveAllUsers]); // Empty dependency array, so it only runs once
 
   const handleUpdateClick = (id) => {
     navigate(`/user/${id}/update/`);
