@@ -4,12 +4,11 @@ import { Routes, Route, Link } from "react-router-dom";
 import { AddUser } from "./components/AddUser";
 import { UserList } from "./components/UserList";
 import { UpdateUser } from "./components/UpdateUser";
-import "./styles.css";
+// import "./styles.css";
 import { useAuth0 } from "@auth0/auth0-react";
-import './App.css';
+// import './App.css';
 import LoginButton from './components/LoginButton';
 import LogoutButton from './components/LogoutButton';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
 import {
   Button,
@@ -179,22 +178,16 @@ export default function App() {
 
   return (
     <div>
-      <nav className="navbar bg-dark">
-        <div className="container-fluid">
-          <span className="appName">
-            React User Authentication</span>
-        </div>
-      </nav>
       <LoginButton />
       <LogoutButton />
       <nav className="navbar navbar-expand navbar-dark bg-info">
         <a href="/" className="navbar-brand">
-          Restaurant User
+           Contact
         </a>
         <div className="navbar-nav mr-auto">
           <li className="nav-item">
             <Link exact to={"/add/"} className="nav-link">
-              Add
+              Create Contact
             </Link>
           </li>
         </div>
@@ -221,7 +214,7 @@ export default function App() {
           <List user={user} key={user.id} setData={setData} />
         ))}
       </div>
-        <table class="bp4-html-table .modifier">
+        {/* <table class="bp4-html-table .modifier">
           <thead>
             <tr>
               <th>Id</th>
@@ -329,7 +322,7 @@ export default function App() {
               </td>
             </tr>
           </tfoot>
-        </table>
+        </table> */}
     </div>
   )
 }
