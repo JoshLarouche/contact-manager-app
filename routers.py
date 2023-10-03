@@ -1,5 +1,5 @@
 from rest_framework import routers
-from user.viewsets import UserViewSet
+from contact.viewsets import ContactViewSet
 
 router = routers.SimpleRouter()
-router.register(r"user", UserViewSet, basename="user")
+router.register(r"contact", ContactViewSet, basename="contact")
