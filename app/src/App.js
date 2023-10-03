@@ -41,7 +41,7 @@ export default function App() {
           }
         });
         setData(allData);
-        console.log("allData: ", allData);
+
       } catch (e) {
         console.log("e: ", e);
       } finally {

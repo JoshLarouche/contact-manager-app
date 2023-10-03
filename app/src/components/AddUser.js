@@ -41,7 +41,6 @@ export const AddUser = () => {
           company: response.data.company,
         });
         setSubmitted(true);
-        console.log(response.data);
       })
       .catch((e) => {
         console.error(e);

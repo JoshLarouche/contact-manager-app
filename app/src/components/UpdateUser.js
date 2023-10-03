@@ -39,7 +39,6 @@ export const UpdateUser = () => {
           website: response.data.website,
           company: response.data.company,
         });
-        console.log(currentUser);
       })
       .catch((e) => {
         console.error(e);
@@ -67,7 +66,6 @@ export const UpdateUser = () => {
           company: response.data.company,
         });
         setSubmitted(true);
-        console.log(response.data);
       })
       .catch((e) => {
         console.error(e);

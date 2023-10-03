@@ -15,7 +15,6 @@ export const UserList = () => {
       .get(`${baseURL}/user/`)
       .then((response) => {
         setUsers(response.data);
-        // console.log(users);
       })
       .catch((e) => {
         console.error(e);
