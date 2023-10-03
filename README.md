@@ -219,6 +219,8 @@ These test cases provide comprehensive coverage for the main functionality descr
 
 ## Notes
 
+I have completed all of the base criteria and bonus criteria to some degree, including setting up a CI pipeline that runs CodeQL successfully and an inital start on a docker build and push workflow.
+
 ### Assumptions
 
  I assumed bonus user story 2 meant that an authenticated user could update a contact, not just create one as an unauthenticated user can.
