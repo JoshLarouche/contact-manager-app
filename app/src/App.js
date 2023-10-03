@@ -5,6 +5,11 @@ import { AddUser } from "./components/AddUser";
 import { UserList } from "./components/UserList";
 import { UpdateUser } from "./components/UpdateUser";
 import "./styles.css";
+import { useAuth0 } from "@auth0/auth0-react";
+import './App.css';
+import LoginButton from './components/LoginButton';
+import LogoutButton from './components/LogoutButton';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from "axios";
 import {
   Button,
@@ -26,6 +31,8 @@ export default function App() {
   const [newPhone, setNewPhone] = useState("")
   const [newWebsite, setNewWebsite] = useState("")
   const [newCompany, setNewCompany] = useState("")
+
+  const { isAuthenticated } = useAuth0();
 
   useEffect(() => {
     const getData = async () => {
@@ -172,25 +179,33 @@ export default function App() {
 
   return (
     <div>
+      <nav className="navbar bg-dark">
+        <div className="container-fluid">
+          <span className="appName">
+            React User Authentication</span>
+        </div>
+      </nav>
+      <LoginButton />
+      <LogoutButton />
       <nav className="navbar navbar-expand navbar-dark bg-info">
-            <a href="/" className="navbar-brand">
-              Restaurant User
-            </a>
-            <div className="navbar-nav mr-auto">
-              <li className="nav-item">
-                <Link exact to={"/add/"} className="nav-link">
-                  Add
-                </Link>
-              </li>
-            </div>
-          </nav>
-          <div className="container m-10">
-            <Routes>
-              <Route path="/" element={<UserList />} />
-              <Route path="/add/" element={<AddUser />} />
-              <Route path="/user/:id/update/" element={<UpdateUser />} />
-            </Routes>
-          </div>
+        <a href="/" className="navbar-brand">
+          Restaurant User
+        </a>
+        <div className="navbar-nav mr-auto">
+          <li className="nav-item">
+            <Link exact to={"/add/"} className="nav-link">
+              Add
+            </Link>
+          </li>
+        </div>
+      </nav>
+      <div className="container m-10">
+        <Routes>
+          <Route path="/" element={<UserList />} />
+          <Route path="/add/" element={<AddUser />} />
+          <Route path="/contact/:id/update/" element={<UpdateUser />} />
+        </Routes>
+      </div>
       <h1>Search For Contact Info</h1>
 
       <input
@@ -257,7 +272,7 @@ export default function App() {
                     onChange={(e) => onChangeHandler(user.id, 'company', e.target.value)}
                   />
                 </td>
-                <td>
+                {isAuthenticated && (<td>
                   <Button intent="primary" onClick={() => updateUser(user.id)}>
                     Update
                   </Button>
@@ -265,7 +280,7 @@ export default function App() {
                   <Button intent="danger" onClick={() => deleteUser(user.id)}>
                     Delete
                   </Button>
-                </td>
+                </td>)}
               </tr>
             ))}
           </tbody>

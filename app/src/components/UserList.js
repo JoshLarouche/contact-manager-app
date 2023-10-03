@@ -1,7 +1,9 @@
 import axios from "axios";
 import React, { useState, useEffect, useCallback } from "react";
-import { baseURL, headers } from "./../services/user.service";
+import { baseURL } from "./../services/user.service";
 import { useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 export const UserList = () => {
   const [users, setUsers] = useState([]);
@@ -9,10 +11,12 @@ export const UserList = () => {
 
   const [deleted, setDeleted] = useState(false);
 
+  const { isAuthenticated } = useAuth0();
+
   // Wrap retrieveAllUsers in useCallback
   const retrieveAllUsers = useCallback(() => {
     axios
-      .get(`${baseURL}/user/`)
+      .get(`${baseURL}/contact/`)
       .then((response) => {
         setUsers(response.data);
       })
@@ -23,7 +27,7 @@ export const UserList = () => {
 
   const deleteUser = (id) => {
     axios
-      .delete(`${baseURL}/user/${id}/`)
+      .delete(`${baseURL}/contact/${id}/`)
       .then((response) => {
         setDeleted(true);
         retrieveAllUsers();
@@ -38,7 +42,7 @@ export const UserList = () => {
   }, [retrieveAllUsers]); // Empty dependency array, so it only runs once
 
   const handleUpdateClick = (id) => {
-    navigate(`/user/${id}/update/`);
+    navigate(`/contact/${id}/update/`);
   };
   return (
     <div className="row justify-content-center">
@@ -75,22 +79,26 @@ export const UserList = () => {
                   className="btn-group justify-content-around w-75 mb-1 "
                   data-toggle="buttons"
                 >
-                  <span>
-                    <button
-                      className="btn btn-info"
-                      onClick={() => handleUpdateClick(user.id)}
-                    >
-                      Update
-                    </button>
-                  </span>
-                  <span>
-                    <button
-                      className="btn btn-danger"
-                      onClick={() => deleteUser(user.id)}
-                    >
-                      Delete
-                    </button>
-                  </span>
+                  {isAuthenticated && ( // Check if the user is authenticated
+                    <>
+                      <span>
+                        <button
+                          className="btn btn-info"
+                          onClick={() => handleUpdateClick(user.id)}
+                        >
+                          Update
+                        </button>
+                      </span>
+                      <span>
+                        <button
+                          className="btn btn-danger"
+                          onClick={() => deleteUser(user.id)}
+                        >
+                          Delete
+                        </button>
+                      </span>
+                    </>
+                  )}
                 </div>
               </div>
             </div>

@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { baseURL, headers } from "./../services/user.service";
+import { baseURL } from "./../services/user.service";
 
 export const AddUser = () => {
   const initialUserState = {
@@ -30,7 +30,7 @@ export const AddUser = () => {
     };
 
     axios
-      .post(`${baseURL}/user/`, data)
+      .post(`${baseURL}/contact/`, data)
       .then((response) => {
         setUser({
           id: response.data.id,

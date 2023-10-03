@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { baseURL, headers } from "./../services/user.service";
+import { baseURL, } from "./../services/user.service";
 
 export const UpdateUser = () => {
   const initialUserState = {
@@ -29,7 +29,7 @@ export const UpdateUser = () => {
 
   const retrieveUser = () => {
     axios
-      .get(`${baseURL}/user/${id}/`)
+      .get(`${baseURL}/contact/${id}/`)
       .then((response) => {
         setCurrentUser({
           id: response.data.id,
@@ -55,7 +55,7 @@ export const UpdateUser = () => {
     };
 
     axios
-      .put(`${baseURL}/user/${id}/`, data)
+      .put(`${baseURL}/contact/${id}/`, data)
       .then((response) => {
         setCurrentUser({
           id: response.data.id,
