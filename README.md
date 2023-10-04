@@ -76,6 +76,18 @@ For running the app locally, you have the option to set up a virtual environment
 
 For running the app in a Docker container, ensure that Docker and Docker Compose are installed on your system.
 
+### Testing
+
+To run the frontend tests, in the app folder,
+```bash
+npm test a
+```
+
+To run the backend tests, in the root folder,
+```bash
+python manage.py test
+```
+
 ### Authentication
 One of the user stories required user authentication and I have implemented that with the use of OAuth. Below are the sample user credentials.
 
