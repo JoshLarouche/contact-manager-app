@@ -46,6 +46,11 @@ cd app
 npm install
 ```
 
+### Start the React Frontend Server
+
+```bash
+npm start
+
 ## Running the App in a Docker Container
 
 ### Prerequisites
