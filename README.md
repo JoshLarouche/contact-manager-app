@@ -50,6 +50,7 @@ npm install
 
 ```bash
 npm start
+```
 
 ## Running the App in a Docker Container
 
@@ -85,12 +86,23 @@ For running the app in a Docker container, ensure that Docker and Docker Compose
 
 To run the frontend tests, in the app folder,
 ```bash
-npm test a
+npm test 
+```
+
+To run with a coverage report,
+```bash
+npm run test -- --coverage .
 ```
 
 To run the backend tests, in the root folder,
 ```bash
 python manage.py test
+```
+
+To run with a coverage report,
+```bash
+coverage run manage.py test
+coverage report
 ```
 
 ### Authentication
@@ -244,7 +256,7 @@ I have completed all of the base criteria and bonus criteria to some degree, inc
 
 ### To Be Completed
 
-- remove commented out code
+- improve commenting
 - improve test coverage
 - improve dockerization
 - improve CI pipeline

@@ -1,20 +1,20 @@
-name: testing
+# name: testing
 
-on:
-    push:
-      branches: main
-    pull_request:
-      # The branches below must be a subset of the branches above
-      branches: main
-    schedule:
-      - cron: "19 23 * * 5"
-jobs:
-  build-push:
-    uses: bcgov/pipeline-templates/.github/workflows/build-push.yaml@main
-    with:
-      IMAGE_REGISTRY: docker.io
-      IMAGE: gregnrobinson/bcgov-nginx-demo
-      WORKDIR: ./demo/nginx
-    secrets:
-      IMAGE_REGISTRY_USER: ${{ secrets.IMAGE_REGISTRY_USER }}
-      IMAGE_REGISTRY_PASSWORD: ${{ secrets.IMAGE_REGISTRY_PASSWORD }}
+# on:
+#     push:
+#       branches: main
+#     pull_request:
+#       # The branches below must be a subset of the branches above
+#       branches: main
+#     schedule:
+#       - cron: "19 23 * * 5"
+# jobs:
+#   build-push:
+#     uses: bcgov/pipeline-templates/.github/workflows/build-push.yaml@main
+#     with:
+#       IMAGE_REGISTRY: docker.io
+#       IMAGE: gregnrobinson/bcgov-nginx-demo
+#       WORKDIR: ./demo/nginx
+#     secrets:
+#       IMAGE_REGISTRY_USER: ${{ secrets.IMAGE_REGISTRY_USER }}
+#       IMAGE_REGISTRY_PASSWORD: ${{ secrets.IMAGE_REGISTRY_PASSWORD }}

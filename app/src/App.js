@@ -4,9 +4,8 @@ import { Routes, Route, Link } from "react-router-dom";
 import { AddUser } from "./components/AddUser";
 import { UserList } from "./components/UserList";
 import { UpdateUser } from "./components/UpdateUser";
-// import "./styles.css";
 import { useAuth0 } from "@auth0/auth0-react";
-// import './App.css';
+import './App.css';
 import LoginButton from './components/LoginButton';
 import LogoutButton from './components/LogoutButton';
 import axios from "axios";
@@ -60,36 +59,6 @@ export default function App() {
     return <div>Loading...</div>;
   }
 
-  // const addUser = () => {
-  //   const name = newName.trim()
-  //   const email = newEmail.trim()
-  //   const website = newWebsite.trim()
-  //   if (name && email && website) {
-  //     fetch("https://jsonplaceholder.typicode.com/users", {
-  //       method: "POST",
-  //       body: JSON.stringify({
-  //         name,
-  //         email,
-  //         website,
-  //       }),
-  //       headers: {
-  //         "Content-type": "application/json; charset=UTF-8",
-  //       },
-  //     })
-  //       .then(response => response.json())
-  //       .then(data2 => {
-  //         setData([...data, data2])
-  //         setNewName("")
-  //         setNewEmail("")
-  //         setNewWebsite("")
-  //         AppToaster.show({
-  //           message: "User added successfully",
-  //           intent: "success",
-  //           timeout: 3000,
-  //         })
-  //       })
-  //   }
-  // }
   const addUser = () => {
     const name = newName.trim();
     const email = newEmail.trim();
@@ -214,115 +183,6 @@ export default function App() {
           <List user={user} key={user.id} setData={setData} />
         ))}
       </div>
-        {/* <table class="bp4-html-table .modifier">
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>Website</th>
-              <th>Company</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data.map((user) => (
-              <tr key={user.id}>
-                <td>{user.id}</td>
-                <td>
-                  <input
-                    type="text"
-                    value={user.name}
-                    onChange={(e) => onChangeHandler(user.id, 'name', e.target.value)}
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    value={user.email}
-                    onChange={(e) => onChangeHandler(user.id, 'email', e.target.value)}
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    value={user.phone}
-                    onChange={(e) => onChangeHandler(user.id, 'phone', e.target.value)}
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    value={user.website}
-                    onChange={(e) => onChangeHandler(user.id, 'website', e.target.value)}
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    value={user.company.name}
-                    onChange={(e) => onChangeHandler(user.id, 'company', e.target.value)}
-                  />
-                </td>
-                {isAuthenticated && (<td>
-                  <Button intent="primary" onClick={() => updateUser(user.id)}>
-                    Update
-                  </Button>
-                  &nbsp;
-                  <Button intent="danger" onClick={() => deleteUser(user.id)}>
-                    Delete
-                  </Button>
-                </td>)}
-              </tr>
-            ))}
-          </tbody>
-          <tfoot>
-            <tr>
-              <td></td>
-              <td>
-                <InputGroup
-                  value={newName}
-                  onChange={e => setNewName(e.target.value)}
-                  placeholder="Add name here..."
-                />
-              </td>
-              <td>
-                <InputGroup
-                  placeholder="Add email here..."
-                  value={newEmail}
-                  onChange={e => setNewEmail(e.target.value)}
-                />
-              </td>
-              <td>
-                <InputGroup
-                  placeholder="Add phone here..."
-                  value={newPhone}
-                  onChange={e => setNewPhone(e.target.value)}
-                />
-              </td>
-              <td>
-                <InputGroup
-                  placeholder="Add website here..."
-                  value={newWebsite}
-                  onChange={e => setNewWebsite(e.target.value)}
-                />
-              </td>
-              <td>
-                <InputGroup
-                  placeholder="Add company here..."
-                  value={newCompany}
-                  onChange={e => setNewCompany(e.target.value)}
-                />
-              </td>
-              <td>
-                <Button intent="success" onClick={addUser}>
-                  Add user
-                </Button>
-              </td>
-            </tr>
-          </tfoot>
-        </table> */}
     </div>
   )
 }

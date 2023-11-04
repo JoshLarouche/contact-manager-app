@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { baseURL } from "./../services/user.service";
+import { useNavigate } from "react-router-dom";
 
 export const AddUser = () => {
   const initialUserState = {
@@ -19,6 +20,8 @@ export const AddUser = () => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
   };
+
+  const navigate = useNavigate();
 
   const submitUser = () => {
     let data = {
@@ -41,6 +44,12 @@ export const AddUser = () => {
           company: response.data.company,
         });
         setSubmitted(true);
+
+        // Add a delay before redirecting to show success messgae
+      setTimeout(() => {
+        navigate("/");
+      }, 2000); // 2000 milliseconds (2 seconds) delay
+        // Redirect to the home page after successful submission
       })
       .catch((e) => {
         console.error(e);

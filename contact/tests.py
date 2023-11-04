@@ -27,7 +27,7 @@ class ContactTest(TestCase):
         max_length = contact._meta.get_field("name").max_length
         self.assertEqual(max_length, 240)
 
-    # views (uses reverse)
+    # views
 
     def test_view_set(self):
         request = APIRequestFactory().get("")
